@@ -1,8 +1,6 @@
-import React from "react";
 import ListContainer from "./components/ListContainer";
 import ListItem from "./components/ListItem";
-import SkeletonRow from "./components/SkeletonRow";
-import { List } from "react-virtualized";
+import { List, AutoSizer } from "react-virtualized";
 
 function App() {
   const rowCount = 900000;
@@ -22,8 +20,10 @@ function App() {
   const width = 750; // Width of the list
   const height = 600; // Height of the list container
 
+  // TODO: Perameter gave us 3 things index, key, style
   const rowRenderer = ({ index, key, style }) => {
     const item = mockData[index];
+
     return (
       <div key={key} style={style}>
         <ListItem item={item} />
@@ -41,13 +41,18 @@ function App() {
           - <SkeletonRow />
         */}
         {/*//TODO:  It takes 4 parameters   height, width, rowCount, rowHeight and a function where jsx  and others rowRenderer*/}
-        <List
-          height={height}
-          width={width}
-          rowCount={rowCount}
-          rowHeight={rowHeight}
-          rowRenderer={rowRenderer}
-        />
+        <AutoSizer>
+          {({ height, width }) => (
+            <List
+              height={height}
+              width={width}
+              rowCount={rowCount}
+              rowHeight={rowHeight}
+              rowRenderer={rowRenderer}
+              overscanColumnCount={5}
+            />
+          )}
+        </AutoSizer>
       </ListContainer>
 
       <div className="max-w-3xl mx-auto text-center text-slate-400 text-xs mt-8">

@@ -17,8 +17,8 @@ function App() {
     }));
 
   const rowHeight = 80; // Fixed height for each row
-  const width = 750; // Width of the list
-  const height = 600; // Height of the list container
+  // const width = 750; // Width of the list
+  // const height = 600; // Height of the list container
 
   // TODO: Perameter gave us 3 things index, key, style
   const rowRenderer = ({ index, key, style }) => {
